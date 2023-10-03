@@ -1,3 +1,4 @@
+import HeroCarousel from "@/components/HeroCarousel";
 import SearchBar from "@/components/SearchBar";
 import Image from "next/image";
 
@@ -29,8 +30,10 @@ export default function Home() {
             </p>
             <SearchBar />
           </div>
-          Hero Carousel
         </div>
+      </section>
+      <section>
+        <HeroCarousel />
       </section>
       <section className='trending-section'>
         <h2 className='section-text'>Trending</h2>
