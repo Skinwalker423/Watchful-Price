@@ -30,11 +30,18 @@ const HeroCarousel = () => {
                 alt={alt}
                 className='object-contain'
               />
-              <p className='legend'>{alt}</p>
+              {/* <p className='legend'>{alt}</p> */}
             </div>
           );
         })}
       </Carousel>
+      <Image
+        src={"assets/icons/hand-drawn-arrow.svg"}
+        width={175}
+        height={175}
+        alt='hand drawn arrow'
+        className='absolute bottom-0 -left-24 max-xl:hidden'
+      />
     </div>
   );
 };
