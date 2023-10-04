@@ -15,6 +15,10 @@ export default function Home() {
                 alt='arrow-right'
                 width={16}
                 height={16}
+                style={{
+                  width: 16,
+                  height: 16,
+                }}
               />
             </p>
             <h1 className='head-text'>
@@ -30,11 +34,10 @@ export default function Home() {
             </p>
             <SearchBar />
           </div>
+          <HeroCarousel />
         </div>
       </section>
-      <section>
-        <HeroCarousel />
-      </section>
+      <section></section>
       <section className='trending-section'>
         <h2 className='section-text'>Trending</h2>
         <div className='flex flex-wrap gap-x-8 gap-y-16'>

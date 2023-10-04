@@ -30,6 +30,7 @@ module.exports = {
       },
       maxWidth: {
         "10xl": "1440px",
+        xs: "480px",
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
