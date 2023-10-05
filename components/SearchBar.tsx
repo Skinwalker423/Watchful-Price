@@ -1,6 +1,7 @@
 "use client";
 
 import React, { FormEvent, useState } from "react";
+import { scrapeAndStoreProduct } from "@/lib/actions";
 
 const isValidAmazonProductUrl = (url: string): boolean => {
   try {
@@ -25,7 +26,9 @@ const SearchBar = () => {
   const [searchPrompt, setSearchPrompt] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (
+    e: FormEvent<HTMLFormElement>
+  ) => {
     e.preventDefault();
     setLoading(true);
     console.log("value", searchPrompt);
@@ -39,14 +42,13 @@ const SearchBar = () => {
     }
 
     try {
-      setTimeout(() => {
-        console.log("done searching value");
-      }, 5000);
+      const product = await scrapeAndStoreProduct(
+        searchPrompt
+      );
+      console.log("product", product);
+      setLoading(false);
     } catch (error: any) {
       console.log("problem with search", error.message);
-      setLoading(false);
-    } finally {
-      console.log("finally finished setting loading false");
       setLoading(false);
     }
   };

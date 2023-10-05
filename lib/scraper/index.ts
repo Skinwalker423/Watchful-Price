@@ -1,4 +1,7 @@
+"use server";
+
 import axios from "axios";
+import * as cheerio from "cheerio";
 
 export async function scrapeAmazonProduct(url: string) {
   if (!url) return;
@@ -20,6 +23,11 @@ export async function scrapeAmazonProduct(url: string) {
   };
 
   try {
+    const response = await axios.get(url, options);
+    console.log(
+      "this is the response data:",
+      response.data
+    );
   } catch (error: any) {
     throw new Error(
       `failed to scrape product: ${error.message}`
