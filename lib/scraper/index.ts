@@ -31,17 +31,24 @@ export async function scrapeAmazonProduct(url: string) {
     const price = $("span.a-price-whole").text().trim();
 
     const currentPrice = extractPrice(
-      $("#attach-base-product-price"),
-      $(".a-price.a-text-price"),
-      $(".priceToPay span.a-offscreen"),
-      $("a.size.base.a-color-price"),
+      $(".priceToPay span.a-price-whole"),
+      $(".a.size.base.a-color-price"),
       $(".a-button-selected .a-color-base")
     );
 
+    const originalPrice = extractPrice(
+      $("#priceblock_ourprice"),
+      $(".a-price.a-text-price span.a-offscreen"),
+      $("#listPrice"),
+      $("#priceblock_dealprice"),
+      $(".a-size-base.a-color-price")
+    );
+
     console.log(
-      "title and price of macbook",
+      "title current price, and original price of macbook",
       title,
-      currentPrice
+      currentPrice,
+      originalPrice
     );
   } catch (error: any) {
     throw new Error(
