@@ -45,7 +45,7 @@ const SearchBar = () => {
       const product = await scrapeAndStoreProduct(
         searchPrompt
       );
-      console.log("product", product);
+
       setLoading(false);
     } catch (error: any) {
       console.log("problem with search", error.message);
