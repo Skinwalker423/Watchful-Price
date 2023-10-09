@@ -17,3 +17,15 @@ export function extractPrice(...elements: any) {
 
   return "";
 }
+
+export function extractQty(elements: any) {
+  const qtyText = elements.text().trim();
+
+  if (qtyText) {
+    const cleanPrice = qtyText.replace(/[^\d]/g, "");
+
+    return cleanPrice;
+  }
+
+  return "";
+}
