@@ -50,6 +50,12 @@ export async function scrapeAmazonProduct(url: string) {
       status.text().trim().toLowerCase() ===
       "currently unavailable";
 
+    const image =
+      $("#imgBlkFront").attr("data-a-dynamic-image") ||
+      $("#landingImage").attr("data-a-dynamic-image");
+
+    console.log("image", image);
+
     console.log(
       "title current price, and original price of macbook",
       title,
