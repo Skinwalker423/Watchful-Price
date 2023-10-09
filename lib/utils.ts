@@ -18,13 +18,23 @@ export function extractPrice(...elements: any) {
   return "";
 }
 
-export function extractQty(elements: any) {
-  const qtyText = elements.text().trim();
+export function extractQty(element: any) {
+  const qtyText = element.text().trim();
 
   if (qtyText) {
     const cleanPrice = qtyText.replace(/[^\d]/g, "");
 
     return cleanPrice;
+  }
+
+  return "";
+}
+
+export function extractCurrency(element: any) {
+  const currencyText = element.text().trim().slice(0, 1);
+
+  if (currencyText) {
+    return currencyText;
   }
 
   return "";
