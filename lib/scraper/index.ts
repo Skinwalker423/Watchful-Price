@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import * as cheerio from "cheerio";
-import { extractPrice } from "../utils";
+import { extractPrice, extractQty } from "../utils";
 
 export async function scrapeAmazonProduct(url: string) {
   if (!url) return;
@@ -44,18 +44,11 @@ export async function scrapeAmazonProduct(url: string) {
       $(".a-size-base.a-color-price")
     );
 
-    const status = $("#availability span")
-      .text()
-      .trim()
-      .toLowerCase();
-    console.log("status", status);
+    const status = $("#availability span");
 
-    const outOfStock = status === "currently unavailable";
-    // const outOfStock =
-    //   $("#availablility span")
-    //     .text()
-    //     .trim()
-    //     .toLowerCase() === "currently unavailable";
+    const outOfStock =
+      status.text().trim().toLowerCase() ===
+      "currently unavailable";
 
     console.log(
       "title current price, and original price of macbook",
@@ -63,8 +56,12 @@ export async function scrapeAmazonProduct(url: string) {
       currentPrice,
       originalPrice
     );
-
-    console.log("out of stock", outOfStock);
+    if (outOfStock) {
+      console.log("out of stock", outOfStock);
+    } else {
+      const qty = extractQty(status);
+      console.log("currently in stock", qty);
+    }
   } catch (error: any) {
     throw new Error(
       `failed to scrape product: ${error.message}`
