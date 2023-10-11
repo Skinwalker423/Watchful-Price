@@ -50,6 +50,8 @@ export async function scrapeAmazonProduct(url: string) {
 
     const status = $("#availability span");
 
+    const qty = extractQty(status);
+
     const outOfStock =
       status.text().trim().toLowerCase() ===
       "currently unavailable";
@@ -81,22 +83,33 @@ export async function scrapeAmazonProduct(url: string) {
     );
     const avgRating = extractPrice(avgRatingsText);
 
-    console.log(
-      "title current price, and original price of macbook",
+    const data = {
+      url,
+      currency: currency || "$",
+      image: imgUrlsArr[0],
       title,
-      currentPrice,
-      originalPrice,
-      currency,
-      discountRate,
-      totalRatings,
-      avgRating
-    );
-    if (outOfStock) {
-      console.log("out of stock", outOfStock);
-    } else {
-      const qty = extractQty(status);
-      console.log("currently in stock", qty);
-    }
+      currentPrice: Number(currentPrice),
+      originalPrice: Number(originalPrice),
+      priceHistory: [],
+      discountRate: Number(discountRate),
+      category: "category",
+      reviewsCount: Number(totalRatings),
+      stars: Number(avgRating),
+      outOfStock: outOfStock,
+    };
+
+    console.log("data", data);
+
+    // console.log(
+    //   "title current price, and original price of macbook",
+    //   title,
+    //   currentPrice,
+    //   originalPrice,
+    //   currency,
+    //   discountRate,
+    //   totalRatings,
+    //   avgRating
+    // );
   } catch (error: any) {
     throw new Error(
       `failed to scrape product: ${error.message}`
