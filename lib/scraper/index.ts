@@ -56,7 +56,8 @@ export async function scrapeAmazonProduct(url: string) {
 
     const images =
       $("#imgBlkFront").attr("data-a-dynamic-image") ||
-      $("#landingImage").attr("data-a-dynamic-image");
+      $("#landingImage").attr("data-a-dynamic-image") ||
+      "";
 
     const parsedImages = JSON.parse(images);
     const imgUrlsArr = Object.keys(parsedImages);
@@ -67,6 +68,8 @@ export async function scrapeAmazonProduct(url: string) {
     const discountRate = $(".savingsPercentage")
       .text()
       .replace(/[-%]/g, "");
+
+    const category = $("");
 
     console.log(
       "title current price, and original price of macbook",
