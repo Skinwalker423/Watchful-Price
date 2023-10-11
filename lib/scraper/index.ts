@@ -2,7 +2,11 @@
 
 import axios from "axios";
 import * as cheerio from "cheerio";
-import { extractPrice, extractQty } from "../utils";
+import {
+  extractCurrency,
+  extractPrice,
+  extractQty,
+} from "../utils";
 
 export async function scrapeAmazonProduct(url: string) {
   if (!url) return;
@@ -54,17 +58,23 @@ export async function scrapeAmazonProduct(url: string) {
       $("#imgBlkFront").attr("data-a-dynamic-image") ||
       $("#landingImage").attr("data-a-dynamic-image");
 
-    if (images) {
-      const parsedImages = JSON.parse(images);
-      const imgUrlsArr = Object.keys(parsedImages);
-      console.log("image", imgUrlsArr);
-    }
+    const parsedImages = JSON.parse(images);
+    const imgUrlsArr = Object.keys(parsedImages);
+    console.log("image", imgUrlsArr);
+
+    const currency = extractCurrency($(".a-price-symbol"));
+
+    const discountRate = $(".savingsPercentage")
+      .text()
+      .replace(/[-%]/g, "");
 
     console.log(
       "title current price, and original price of macbook",
       title,
       currentPrice,
-      originalPrice
+      originalPrice,
+      currency,
+      discountRate
     );
     if (outOfStock) {
       console.log("out of stock", outOfStock);
