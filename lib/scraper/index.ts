@@ -76,6 +76,11 @@ export async function scrapeAmazonProduct(url: string) {
     const totalRatings = extractQty(totalRatingsText);
     console.log("total ratings", totalRatings);
 
+    const avgRatingsText = $(
+      ".a-size-base.a-nowrap span.a-size-medium.a-color-base"
+    );
+    const avgRating = extractPrice(avgRatingsText);
+
     console.log(
       "title current price, and original price of macbook",
       title,
@@ -83,7 +88,8 @@ export async function scrapeAmazonProduct(url: string) {
       originalPrice,
       currency,
       discountRate,
-      totalRatings
+      totalRatings,
+      avgRating
     );
     if (outOfStock) {
       console.log("out of stock", outOfStock);
