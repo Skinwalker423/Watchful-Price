@@ -99,17 +99,6 @@ export async function scrapeAmazonProduct(url: string) {
     };
 
     console.log("data", data);
-
-    // console.log(
-    //   "title current price, and original price of macbook",
-    //   title,
-    //   currentPrice,
-    //   originalPrice,
-    //   currency,
-    //   discountRate,
-    //   totalRatings,
-    //   avgRating
-    // );
   } catch (error: any) {
     throw new Error(
       `failed to scrape product: ${error.message}`
