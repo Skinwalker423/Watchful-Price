@@ -5,14 +5,14 @@ let isConnected = false;
 export const connectToDb = async () => {
   mongoose.set("strictQuery", true);
 
-  if (!process.env.MONGODB_URI) {
+  if (!process.env.MONGODB_URL) {
     return console.error("mongo uri not defined");
   }
 
   if (isConnected) return console.log("already connected");
   try {
     const connect = await mongoose.connect(
-      process.env.MONGODB_URI
+      process.env.MONGODB_URL
     );
     isConnected = true;
     console.log("now connected");
