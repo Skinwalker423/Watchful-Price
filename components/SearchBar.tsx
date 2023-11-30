@@ -31,7 +31,6 @@ const SearchBar = () => {
   ) => {
     e.preventDefault();
     setLoading(true);
-    console.log("value", searchPrompt);
 
     const isValidLink =
       isValidAmazonProductUrl(searchPrompt);

@@ -64,7 +64,6 @@ export async function scrapeAmazonProduct(url: string) {
 
     const parsedImages = JSON.parse(images);
     const imgUrlsArr = Object.keys(parsedImages);
-    console.log("image", imgUrlsArr);
 
     const currency = extractCurrency($(".a-price-symbol"));
 
@@ -77,7 +76,6 @@ export async function scrapeAmazonProduct(url: string) {
     );
 
     const totalRatings = extractQty(totalRatingsText);
-    console.log("total ratings", totalRatings);
 
     const avgRatingsText = $(
       ".a-size-base.a-nowrap span.a-size-medium.a-color-base"
